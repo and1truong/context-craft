@@ -18,7 +18,7 @@
 2. Clone the repository:
    ```bash
    git clone git@github.com:and1truong/context-craft.git
-   cd contextcraft
+   cd context-craft
    ```
 3. Build the binary:
    ```bash
