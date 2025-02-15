@@ -17,7 +17,7 @@
 1. Ensure you have Go installed on your system.
 2. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/contextcraft.git
+   git clone git@github.com:and1truong/context-craft.git
    cd contextcraft
    ```
 3. Build the binary:
