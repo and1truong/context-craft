@@ -54,6 +54,11 @@ std::string generateYAML(const std::map<std::string, std::string>& fileContents)
 
 
 int main(int argc, char* argv[]) {
+    // std::cout << "Number of arguments: " << argc << std::endl;
+    // for (int i = 0; i < argc; ++i) {
+    //     std::cout << "argv[" << i << "]: " << argv[i] << std::endl;
+    // }
+
     // Default values
     std::string directory = "";
     std::vector<std::string> extensions;
@@ -94,8 +99,10 @@ int main(int argc, char* argv[]) {
     // Walk through the directory
     for (const auto& entry : fs::recursive_directory_iterator(directory)) {
         // Skip .git directory and its contents
-        if (entry.is_directory() && entry.path().filename() == ".git") {
-          continue; 
+        if (entry.is_directory()) {
+            if (entry.path().filename() == ".git") {
+                continue;
+            }
         }
 
         if (fs::is_regular_file(entry) && hasExtension(entry.path().filename().string(), extensions)) {
