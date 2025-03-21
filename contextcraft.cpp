@@ -93,7 +93,23 @@ int main(int argc, char* argv[]) {
 
     // Walk through the directory
     for (const auto& entry : fs::recursive_directory_iterator(directory)) {
+        // Skip .git directory and its contents
+        if (entry.is_directory() && entry.path().filename() == ".git") {
+          continue; 
+        }
+
         if (fs::is_regular_file(entry) && hasExtension(entry.path().filename().string(), extensions)) {
+          
+            // Double check: ensure the file is not within the .git directory *at any level*
+            bool inGitDir = false;
+            for(const auto& part : entry.path()) {
+                if (part == ".git") {
+                    inGitDir = true;
+                    break;
+                }
+            }
+            if (inGitDir) continue;
+          
             std::ifstream file(entry.path());
             if (file.is_open()) {
                 std::stringstream buffer;
